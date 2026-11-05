@@ -78,13 +78,13 @@ def find_best_peaks(heatmap: List[Dict], min_gap_seconds: float = 60.0, top_k: i
 
     return selected_peaks
 
-def download_peak_buffer(youtube_url: str, peak_second: float, output_path: str, buffer_before: float = 15.0, buffer_after: float = 30.0) -> bool:
-    """Download exact 45s buffer centered on the heatmap peak."""
+def download_peak_buffer(youtube_url: str, peak_second: float, output_path: str, buffer_before: float = 35.0, buffer_after: float = 55.0) -> bool:
+    """Download exact 90s buffer centered on the heatmap peak for 1-minute Shorts."""
     start_sec = max(0.0, peak_second - buffer_before)
     end_sec = peak_second + buffer_after
     section_str = f"*{int(start_sec)}-{int(end_sec)}"
 
-    print(f"📥 Downloading 45s peak buffer [{int(start_sec)}s - {int(end_sec)}s] -> {output_path}...")
+    print(f"📥 Downloading peak buffer [{int(start_sec)}s - {int(end_sec)}s] -> {output_path}...")
     
     cmd = get_ytdlp_cmd() + [
         "--download-sections", section_str,

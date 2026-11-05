@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Configuration for Autonomous Indian Podcast & Street Interview Clipping Engine
-Prioritizes top viral Indian podcasts, street interviews, and life lessons.
+Supports 1-minute (45s–58s) full-story Shorts and 15s punchline clips.
 """
 import os
 from pathlib import Path
@@ -49,8 +49,11 @@ CURATED_SOURCES = [
 # Video Layout and Audio Settings
 VIDEO_WIDTH = 1080
 VIDEO_HEIGHT = 1920
-TARGET_MIN_DURATION = 11.5
-TARGET_MAX_DURATION = 14.5
+
+# Duration Settings: 48s - 58.5s for 1-minute full story YouTube Shorts
+DEFAULT_MIN_DURATION = 45.0
+DEFAULT_MAX_DURATION = 58.5
+
 BLUR_SIGMA = 35
 
 # Subtitle Settings

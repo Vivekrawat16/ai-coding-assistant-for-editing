@@ -49,8 +49,14 @@ def transcribe_buffer(video_path: str) -> List[Dict]:
     print(f"  📝 Transcribed {len(words)} words (Language: {info.language}).")
     return words
 
-def find_optimal_slice(words: List[Dict], buffer_duration: float, target_duration: float = 12.8) -> Tuple[float, float, str]:
-    """Finds the most coherent 11.5s - 14.5s window containing a complete thought."""
+def find_optimal_slice(
+    words: List[Dict],
+    buffer_duration: float,
+    min_duration: float = config.DEFAULT_MIN_DURATION,
+    max_duration: float = config.DEFAULT_MAX_DURATION
+) -> Tuple[float, float, str]:
+    """Finds the most coherent 45s - 58s full-story window containing a complete thought."""
+    target_duration = (min_duration + max_duration) / 2.0
     if not words:
         mid = buffer_duration / 2.0
         start = max(0.0, mid - (target_duration / 2.0))
@@ -63,15 +69,15 @@ def find_optimal_slice(words: List[Dict], buffer_duration: float, target_duratio
 
     for i, w in enumerate(words):
         w_start = w["start"]
-        for j in range(i + 4, len(words)):
+        for j in range(i + 15, len(words)):
             w_end = words[j]["end"]
             dur = w_end - w_start
-            if config.TARGET_MIN_DURATION <= dur <= config.TARGET_MAX_DURATION:
+            if min_duration <= dur <= max_duration:
                 center_dist = abs(((w_start + w_end) / 2.0) - center_time)
                 ends_with_punch = words[j]["word"].endswith((".", "!", "?"))
                 word_count = j - i + 1
 
-                score = (word_count * 1.5) - (center_dist * 2.5) + (10.0 if ends_with_punch else 0.0)
+                score = (word_count * 1.5) - (center_dist * 2.5) + (15.0 if ends_with_punch else 0.0)
 
                 if score > best_score:
                     best_score = score
@@ -79,7 +85,7 @@ def find_optimal_slice(words: List[Dict], buffer_duration: float, target_duratio
                     best_end = w_end
 
     if best_score == -9999.0:
-        best_start = max(0.0, center_time - 6.5)
+        best_start = max(0.0, center_time - (target_duration / 2.0))
         best_end = min(buffer_duration, best_start + target_duration)
 
     slice_words = [w["word"] for w in words if best_start <= w["start"] <= best_end]

@@ -32,6 +32,7 @@ def run_pipeline(
     count: int = 1,
     custom_url: str = None,
     custom_search: str = None,
+    duration: float = 55.0,
     upload_drive: bool = False,
     upload_youtube: bool = False,
     privacy_status: str = "public"
@@ -82,8 +83,15 @@ def run_pipeline(
         tmp_ass = f"/tmp/captions_{video_id}.ass"
         out_short = str(config.OUTPUT_DIR / f"short_{video_id}_{int(peak_second)}.mp4")
 
-        # Step 1: Download 45s buffer centered on peak
-        success = download_peak_buffer(target_url, peak_second, tmp_buffer)
+        # Step 1: Download 90s buffer centered on peak for full story
+        buffer_len = max(45.0, duration + 35.0)
+        success = download_peak_buffer(
+            target_url,
+            peak_second,
+            tmp_buffer,
+            buffer_before=35.0,
+            buffer_after=buffer_len - 35.0
+        )
         if not success:
             print("❌ Failed to download buffer. Skipping...")
             continue
@@ -94,8 +102,15 @@ def run_pipeline(
             print("❌ Transcription returned 0 words. Skipping...")
             continue
 
-        # Step 3: Find Optimal 11.5s - 14.5s Slice
-        slice_start, slice_end, slice_text = find_optimal_slice(words, buffer_duration=45.0)
+        # Step 3: Find Optimal 45s - 58s Story Slice
+        min_d = max(11.0, duration - 5.0)
+        max_d = min(59.0, duration + 3.0)
+        slice_start, slice_end, slice_text = find_optimal_slice(
+            words,
+            buffer_duration=buffer_len,
+            min_duration=min_d,
+            max_duration=max_d
+        )
         slice_dur = slice_end - slice_start
         print(f"✂️ Sliced: {slice_start:.2f}s -> {slice_end:.2f}s ({slice_dur:.2f}s)")
         print(f"💬 Punchline: \"{slice_text}\"")
@@ -156,6 +171,7 @@ def run_pipeline(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Autonomous Podcast & Street Interview Clipping Pipeline")
     parser.add_argument("--count", type=int, default=1, help="Number of shorts to generate")
+    parser.add_argument("--duration", type=float, default=55.0, help="Target duration in seconds (default: 55.0 for 1-min Shorts)")
     parser.add_argument("--url", type=str, default=None, help="Specific YouTube URL to process")
     parser.add_argument("--search", type=str, default=None, help="Custom search query")
     parser.add_argument("--upload-drive", action="store_true", help="Upload rendered video to Google Drive queue")
@@ -167,6 +183,7 @@ if __name__ == "__main__":
         count=args.count,
         custom_url=args.url,
         custom_search=args.search,
+        duration=args.duration,
         upload_drive=args.upload_drive,
         upload_youtube=args.upload_youtube,
         privacy_status=args.privacy
