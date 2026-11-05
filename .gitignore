@@ -1,0 +1,40 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv/
+venv/
+insta_env/
+env/
+ENV/
+
+# Secrets and Session Tokens (NEVER COMMIT)
+*.env
+*.env.local
+insta_session.json
+insta_session_coool_verse.json
+*.session
+*.key
+service_account*.json
+
+# Media files (Large binaries)
+*.mp4
+*.webm
+*.mov
+*.avi
+*.mkv
+*.mp3
+*.wav
+*.m4a
+
+# Whitelist small core character template clips
+!personal/assets/clips/*.mp4
+
+# Temp logs and outputs
+/tmp/
+*.log
+mask_*.png
+overlay_*.png
+*.png_pipe

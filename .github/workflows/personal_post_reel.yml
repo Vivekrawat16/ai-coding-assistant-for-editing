@@ -1,0 +1,55 @@
+name: "Post Next Instagram Reel"
+
+on:
+  # Automated 4 Reels Daily Schedule (UTC times converted from IST)
+  schedule:
+    # 11:00 AM IST (05:30 UTC) & 2:00 PM IST (08:30 UTC)
+    - cron: '30 5,8 * * *'
+    # 6:30 PM IST (13:00 UTC) & 9:30 PM IST (16:00 UTC)
+    - cron: '0 13,16 * * *'
+
+  # Manual on-demand trigger via GitHub UI
+  workflow_dispatch:
+
+# Ensure only one reel upload runs at a time to prevent duplicate posts
+concurrency:
+  group: instagram-upload-queue
+  cancel-in-progress: false
+
+jobs:
+  upload-reel:
+    name: "Upload Reel to Instagram"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install System FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Cloud Reel Poster
+        env:
+          INSTA_SESSION_JSON: ${{ secrets.INSTA_SESSION_JSON }}
+          GDRIVE_SA_KEY: ${{ secrets.GDRIVE_SA_KEY }}
+          GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID != '' && secrets.GDRIVE_FOLDER_ID || '15tEG1buRhHi8g4lkv98KMJC_-LHupuvV' }}
+          GDRIVE_ARCHIVE_ID: ${{ secrets.GDRIVE_ARCHIVE_ID != '' && secrets.GDRIVE_ARCHIVE_ID || '19oTHwlAxucPomUfLXAOanyDyzTMeshya' }}
+          PROXY_URL: ${{ secrets.PROXY_URL }}
+          WHATSAPP_PHONE: ${{ secrets.WHATSAPP_PHONE }}
+          WHATSAPP_APIKEY: ${{ secrets.WHATSAPP_APIKEY }}
+        run: |
+          python shared/cloud_post_reel.py
