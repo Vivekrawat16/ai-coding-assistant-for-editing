@@ -21,6 +21,7 @@ Never mix assets, credentials, Drive folders, or logic between these two tracks:
 | **Watermark Rule** | `@vformemes` only | **Zero third-party watermarks** (Mandatory) |
 | **Google Drive Queue** | `15tEG1buRhHi8g4lkv98KMJC_-LHupuvV` | `1NuU7Jc3zLVnd08UZh6U-2QrlWxOmEWXr` |
 | **Google Drive Archive**| `19oTHwlAxucPomUfLXAOanyDyzTMeshya` | `1E3xbmMxuMykWskFagbQ155mn5Dq1QWfG` |
+| **Posting Frequency** | **5x Daily** (10AM, 2PM, 5PM, 8PM, 11PM IST) | **Every 3 Hours** (8x Daily round-the-clock) |
 | **Special Mechanism** | 2-Day Topic Clustering Feedback Loop | clipping.net bounty ($50/100K views) |
 
 ---
