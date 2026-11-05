@@ -26,12 +26,15 @@ from source_scanner import discover_candidate, download_peak_buffer, mark_id_pro
 from slice_detector import transcribe_buffer, find_optimal_slice, generate_viral_hooks, generate_kinetic_ass
 from render_short import render_podcast_short
 from google_drive_uploader import upload_to_drive_queue
+from youtube_uploader import upload_short
 
 def run_pipeline(
     count: int = 1,
     custom_url: str = None,
     custom_search: str = None,
-    upload_drive: bool = False
+    upload_drive: bool = False,
+    upload_youtube: bool = False,
+    privacy_status: str = "public"
 ):
     print("=" * 65)
     print("🚀 STARTING PODCAST & STREET INTERVIEW CLIPPING PIPELINE")
@@ -121,6 +124,17 @@ def run_pipeline(
             mark_id_processed(video_id)
             print(f"🎉 Short successfully saved: {out_short}")
 
+            # Optional YouTube Shorts Upload
+            if upload_youtube:
+                yt_title = f"{hook1} | {hook2} #Shorts"
+                yt_desc = f"{target_title}\n\nPunchline: \"{slice_text}\"\n\n#Shorts #Podcast #StreetInterview"
+                upload_short(
+                    video_path=out_short,
+                    title=yt_title,
+                    description=yt_desc,
+                    privacy_status=privacy_status
+                )
+
             # Optional Drive Queue Upload
             if upload_drive:
                 upload_to_drive_queue(out_short)
@@ -145,11 +159,15 @@ if __name__ == "__main__":
     parser.add_argument("--url", type=str, default=None, help="Specific YouTube URL to process")
     parser.add_argument("--search", type=str, default=None, help="Custom search query")
     parser.add_argument("--upload-drive", action="store_true", help="Upload rendered video to Google Drive queue")
+    parser.add_argument("--upload-youtube", action="store_true", help="Upload rendered video to YouTube Shorts")
+    parser.add_argument("--privacy", type=str, default="public", choices=["public", "unlisted", "private"], help="YouTube privacy status")
 
     args = parser.parse_args()
     run_pipeline(
         count=args.count,
         custom_url=args.url,
         custom_search=args.search,
-        upload_drive=args.upload_drive
+        upload_drive=args.upload_drive,
+        upload_youtube=args.upload_youtube,
+        privacy_status=args.privacy
     )
