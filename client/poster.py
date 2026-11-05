@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Preme Reel Poster for @coool_verse_
+Preme Reel Poster for Client Account
 Uploads the next pending Preme reel to Instagram and records the post URL for clipping.net tracking.
 """
 
@@ -14,7 +14,7 @@ from pathlib import Path
 from instagrapi import Client
 
 BASE_DIR = Path(__file__).resolve().parent
-SESSION_FILE = os.getenv("INSTA_SESSION_FILE") or str(BASE_DIR / "insta_session_coool_verse.json")
+SESSION_FILE = os.getenv("INSTA_SESSION_FILE") or str(BASE_DIR / "insta_session_client.json")
 MANIFEST_FILE = BASE_DIR / "preme_queue_manifest.json"
 DRIVE_ARCHIVE_ID = (os.getenv("PREME_GDRIVE_ARCHIVE_ID") or "1E3xbmMxuMykWskFagbQ155mn5Dq1QWfG").strip()
 
@@ -70,7 +70,7 @@ def post_next_reel():
         return
 
     print("=" * 60)
-    print(f"🚀 POSTING REEL TO INSTAGRAM (@coool_verse_)")
+    print("🚀 POSTING REEL TO INSTAGRAM (Client Campaign)")
     print(f"📹 Video: {os.path.basename(reel_path)}")
     print(f"🎯 Hook: {target.get('hook_line1')} / {target.get('hook_line2')}")
     print("=" * 60)

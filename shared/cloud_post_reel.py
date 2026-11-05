@@ -214,7 +214,8 @@ def send_whatsapp_alert(reel_num, filename, insta_url, remaining_count=None):
     m = re.match(r'reel_\d+_(.*)', slug)
     topic = m.group(1).replace('_', ' ').title() if m else slug
 
-    msg = f"🎉 *Reel #{reel_num} Live on Instagram!*\n\n🎬 *Account:* @vformemes\n📌 *Topic:* {topic}\n🔗 *Link:* {insta_url}"
+    account_name = os.getenv("INSTA_ACCOUNT_LABEL", "Instagram")
+    msg = f"🎉 *Reel #{reel_num} Live on Instagram!*\n\n🎬 *Account:* {account_name}\n📌 *Topic:* {topic}\n🔗 *Link:* {insta_url}"
     if remaining_count is not None:
         msg += f"\n📦 *Queue Remaining:* {remaining_count} reels"
 

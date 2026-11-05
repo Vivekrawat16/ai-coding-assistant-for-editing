@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Cluster Generator for @vformemes
+Cluster Generator for Meme Reels
 Takes the winning topic from performance auditor and creates 3 high-impact
 spin-off meme reel specifications clustered around that winning theme.
 """
@@ -29,7 +29,7 @@ CLUSTER_LIBRARY = {
                 "kya karte ho, sachme naukri hai ya",
                 "papa ke paise uda rahe ho?'"
             ],
-            "caption": "Fufaji ki interrogation CBI se zyada dangerous hai 💀😭 Har shaadi me ek interview round compulsory hai.\n\nTag that relative who questions your entire existence! 😂👇\n\n#chaarlog #relatives #indianwedding #desimemes #relatable #familydrama #vformemes"
+            "caption": "Fufaji ki interrogation CBI se zyada dangerous hai 💀😭 Har shaadi me ek interview round compulsory hai.\n\nTag that relative who questions your entire existence! 😂👇\n\n#chaarlog #relatives #indianwedding #desimemes #relatable #familydrama #memesdaily"
         },
         {
             "slug": "aunty_swiggy_delivery_stare",
@@ -43,7 +43,7 @@ CLUSTER_LIBRARY = {
                 "agla phone sidha mummy ko:",
                 "'Bhabhi ji, ghar me khana nahi ban raha kya?'"
             ],
-            "caption": "Aunty ka CCTV surveillance network NASA se zyada active hai 💀😭 Ek burger order kiya tha pure mohalle me khabar ho gayi.\n\nTag that neighbor aunty! 😂👇\n\n#desiaunty #zomato #mohalla #indianhousehold #desicomedy #vformemes #laughter"
+            "caption": "Aunty ka CCTV surveillance network NASA se zyada active hai 💀😭 Ek burger order kiya tha pure mohalle me khabar ho gayi.\n\nTag that neighbor aunty! 😂👇\n\n#desiaunty #zomato #mohalla #indianhousehold #desicomedy #memesdaily #laughter"
         },
         {
             "slug": "sharmaji_beta_ctc_dinner",
@@ -57,7 +57,7 @@ CLUSTER_LIBRARY = {
                 "aur ab bina kuch bole bas",
                 "meri thali ki roti ko ghoor rahe hain"
             ],
-            "caption": "Jab silence me bhi taane sunai dene lagein 💀😭 Comparison syndrome at peak level.\n\nDrop an 'F' in comments if your parents compare you to Sharma ji ka beta! 😭\n\n#sharmajikabeta #indianparents #ctccomparison #corporatehumor #vformemes"
+            "caption": "Jab silence me bhi taane sunai dene lagein 💀😭 Comparison syndrome at peak level.\n\nDrop an 'F' in comments if your parents compare you to Sharma ji ka beta! 😭\n\n#sharmajikabeta #indianparents #ctccomparison #corporatehumor #memesdaily"
         },
         {
             "slug": "biodata_ctc_roundoff",
@@ -71,7 +71,7 @@ CLUSTER_LIBRARY = {
                 "in-hand salary slip maang li...",
                 "meri halat kharab ho gayi"
             ],
-            "caption": "CTC vs In-hand ka sach rishte tudwa sakta hai 💀😭 Stocks aur PF count karke 18L banaya tha bhaiya.\n\nTag a friend looking for rishtas! 😂👇\n\n#matrimony #ctcvsinhand #arrangedmarriage #desimemes #vformemes"
+            "caption": "CTC vs In-hand ka sach rishte tudwa sakta hai 💀😭 Stocks aur PF count karke 18L banaya tha bhaiya.\n\nTag a friend looking for rishtas! 😂👇\n\n#matrimony #ctcvsinhand #arrangedmarriage #desimemes #memesdaily"
         }
     ],
     "landlord_pg": [
@@ -87,7 +87,7 @@ CLUSTER_LIBRARY = {
                 "'Diwaar ki positive aura kam hone ka'",
                 "12,000 kaat liya..."
             ],
-            "caption": "Bangalore/Delhi landlords deduct money for breathing inside the flat 💀😭 Deposit wapsi is a myth.\n\nTag your roommates who lost security deposit! 😂👇\n\n#landlordproblems #pglife #bangalorelandlords #securitydeposit #desicomedy #vformemes"
+            "caption": "Bangalore/Delhi landlords deduct money for breathing inside the flat 💀😭 Deposit wapsi is a myth.\n\nTag your roommates who lost security deposit! 😂👇\n\n#landlordproblems #pglife #bangalorelandlords #securitydeposit #desicomedy #memesdaily"
         },
         {
             "slug": "landlord_geyser_meter_warning",
@@ -101,7 +101,7 @@ CLUSTER_LIBRARY = {
                 "'Geyser 10 minute se zyada chala",
                 "toh unit rate double lagega beta'"
             ],
-            "caption": "Sardiyon me geyser chalane ki permission lene ke liye application likhni padegi 💀😭 PG landlord supremacy.\n\nTag your landlord! 😂👇\n\n#pglife #landlorddrama #winterstruggles #indianmemes #vformemes"
+            "caption": "Sardiyon me geyser chalane ki permission lene ke liye application likhni padegi 💀😭 PG landlord supremacy.\n\nTag your landlord! 😂👇\n\n#pglife #landlorddrama #winterstruggles #indianmemes #memesdaily"
         },
         {
             "slug": "bachelor_flat_interview_rounds",
@@ -115,7 +115,7 @@ CLUSTER_LIBRARY = {
                 "LinkedIn profile aur 3 reference maang liye...",
                 "Google interview se bhi zyada tough hai"
             ],
-            "caption": "Bachelor hona is a crime in Indian societies 💀😭 IIT degree ke baad bhi bachelor flat rejection milta hai.\n\nTag all bachelors surviving out there! 😂👇\n\n#bachelorlife #societyrules #indianrentals #delhincr #bangalore #vformemes"
+            "caption": "Bachelor hona is a crime in Indian societies 💀😭 IIT degree ke baad bhi bachelor flat rejection milta hai.\n\nTag all bachelors surviving out there! 😂👇\n\n#bachelorlife #societyrules #indianrentals #delhincr #bangalore #memesdaily"
         }
     ],
     "corporate_majdoori": [
@@ -131,7 +131,7 @@ CLUSTER_LIBRARY = {
                 "jaise usne mujhe apni kidney",
                 "aur property daan me de di ho"
             ],
-            "caption": "2.1% hike dekar bolte hain 'Company has huge plans for your career' 💀😭 Corporate comedy at peak.\n\nTag your manager if you're feeling brave! 😂👇\n\n#corporatehumor #appraisalseason #hike2percent #corporatemajdoor #vformemes"
+            "caption": "2.1% hike dekar bolte hain 'Company has huge plans for your career' 💀😭 Corporate comedy at peak.\n\nTag your manager if you're feeling brave! 😂👇\n\n#corporatehumor #appraisalseason #hike2percent #corporatemajdoor #memesdaily"
         },
         {
             "slug": "friday_five_fifty_nine_ping",
@@ -145,7 +145,7 @@ CLUSTER_LIBRARY = {
                 "aur manager ka Teams notification pop hua:",
                 "'Quick sync beta, 5 mins only'"
             ],
-            "caption": "Wo 5 min ka quick sync 2 ghante aur Monday ka dukh ban jata hai 💀😭 Weekend plan cancelled.\n\nTag your colleague who relates! 😭👇\n\n#corporatelife #teamsnotification #fridayquicksync #desimemes #vformemes"
+            "caption": "Wo 5 min ka quick sync 2 ghante aur Monday ka dukh ban jata hai 💀😭 Weekend plan cancelled.\n\nTag your colleague who relates! 😭👇\n\n#corporatelife #teamsnotification #fridayquicksync #desimemes #memesdaily"
         }
     ]
 }

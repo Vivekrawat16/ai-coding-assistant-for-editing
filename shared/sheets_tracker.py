@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Preme Clipping Google Sheet Live Tracker
-Maintains live ledger of all posted reels on @coool_verse_ for campaign bounty tracking.
+Maintains live ledger of all posted reels for campaign bounty tracking.
 Works in:
 1. Cloud GitHub Actions (using Service Account via GDRIVE_SA_KEY)
 2. Local System (using gsheets CLI or fallback)

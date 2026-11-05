@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Performance Auditor for @vformemes
+Performance Auditor for Instagram Meme Reels
 Scrapes recent reels, extracts views/likes/comments, classifies into topic categories,
 and determines the winning topic for clustering.
 """
@@ -75,7 +75,9 @@ def get_insta_client() -> Client:
 
     return cl
 
-def audit_performance(username: str = "vformemes", limit: int = 15) -> Dict[str, Any]:
+def audit_performance(username: str = None, limit: int = 15) -> Dict[str, Any]:
+    if not username:
+        username = os.getenv("INSTA_AUDIT_USERNAME", "me")
     print(f"Auditing last {limit} reels for @{username}...")
     cl = get_insta_client()
 
@@ -147,5 +149,5 @@ def audit_performance(username: str = "vformemes", limit: int = 15) -> Dict[str,
     return {"winner": winner, "rankings": ranked}
 
 if __name__ == "__main__":
-    res = audit_performance("vformemes", 15)
+    res = audit_performance(limit=15)
     print("\nWinner:", json.dumps(res.get("winner"), indent=2))

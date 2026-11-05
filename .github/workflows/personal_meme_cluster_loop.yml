@@ -1,4 +1,4 @@
-name: "@vformemes Topic Clustering Feedback Loop"
+name: "Meme Topic Clustering Feedback Loop"
 
 on:
   # Runs every 2 days at 1:30 PM IST (08:00 UTC)

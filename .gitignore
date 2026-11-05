@@ -13,8 +13,7 @@ ENV/
 # Secrets and Session Tokens (NEVER COMMIT)
 *.env
 *.env.local
-insta_session.json
-insta_session_coool_verse.json
+insta_session*.json
 *.session
 *.key
 service_account*.json

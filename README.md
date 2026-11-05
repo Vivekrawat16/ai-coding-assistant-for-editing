@@ -16,7 +16,7 @@ ai-coding-assistant-for-editing/
 ├── requirements.txt                   # Universal dependencies
 │
 ├── personal/                          # 🟢 TRACK 1: PERSONAL (Reddit Memes)
-│   ├── audit/                         # Performance auditing for @vformemes
+│   ├── audit/                         # Performance auditing for personal meme page
 │   │   └── performance_auditor.py
 │   ├── generator/                     # 2-Day Topic Clustering Feedback Loop
 │   │   ├── cluster_generator.py
@@ -35,7 +35,7 @@ ai-coding-assistant-for-editing/
 │   ├── renderer/                      # 1080x1920 with blurred background & Preme overlay
 │   │   └── render_engine.py
 │   ├── pipeline.py                    # End-to-end Preme ingest -> render -> drive queue
-│   ├── poster.py                      # Post to @coool_verse_ & log to Desktop
+│   ├── poster.py                      # Post to Client Account & log to Desktop
 │   └── assets/
 │       └── Preme_Overlay.png          # Official campaign branding
 │
@@ -45,9 +45,9 @@ ai-coding-assistant-for-editing/
 │
 └── .github/workflows/                 # ☁️ 24/7 GITHUB ACTIONS CLOUD RUNNERS
     ├── personal_meme_cluster_loop.yml # Runs every 2 days (1:30 PM IST)
-    ├── personal_post_reel.yml         # 4x daily meme post (11AM, 2PM, 6:30PM, 9:30PM)
+    ├── personal_post_reel.yml         # 5x daily meme post (10AM, 2PM, 5PM, 8PM, 11PM)
     ├── client_preme_daily_pipeline.yml# Daily Preme clipping at 10:30 AM IST
-    └── client_post_preme_reel.yml     # Preme posting at US evening peaks
+    └── client_post_preme_reel.yml     # Preme posting every 3 hours
 ```
 
 ---
@@ -56,11 +56,11 @@ ai-coding-assistant-for-editing/
 
 | Feature | Track 1: Personal Memes | Track 2: Client Clipping |
 | :--- | :--- | :--- |
-| **Account** | `@vformemes` | `@coool_verse_` |
+| **Account** | Personal Meme Account | Client Campaign Account |
 | **Theme** | Relatable Desi/Pop-culture Memes | Twitch / Kick Streamer Highlights |
 | **Format** | Option A (Pure Black Canvas) | Blurred BG + 16:9 Stream Center |
 | **Duration** | **6.0 – 8.0s** | **10.0 – 15.0s** (Strict 15s max) |
-| **Branding** | `@vformemes` text watermark | Official `Preme_Overlay.png` badge |
+| **Branding** | Customizable subtle watermark | Official `Preme_Overlay.png` badge |
 | **Campaign Goal** | Organic Meme Growth & Virality | **$50 / 100K Views Bounty** on clipping.net |
 | **Drive Queue** | `15tEG1buRhHi8g4lkv98KMJC_-LHupuvV` | `1NuU7Jc3zLVnd08UZh6U-2QrlWxOmEWXr` |
 | **Drive Archive** | `19oTHwlAxucPomUfLXAOanyDyzTMeshya` | `1E3xbmMxuMykWskFagbQ155mn5Dq1QWfG` |

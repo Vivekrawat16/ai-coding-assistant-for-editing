@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   upload-preme-reel:
-    name: "Upload Preme Reel to Instagram (@coool_verse_)"
+    name: "Upload Preme Reel to Instagram (Client Campaign Account)"
     runs-on: ubuntu-latest
     timeout-minutes: 10
 

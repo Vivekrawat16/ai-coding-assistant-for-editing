@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Meme Topic Cluster Pipeline for @vformemes
+Meme Topic Cluster Pipeline
 Runs every 2 days to:
 1. Audit Instagram performance and find winning topics
 2. Generate 3 clustered spin-off reel specifications
-3. Render 1080x1920 Option A reels with @vformemes branding
+3. Render 1080x1920 Option A reels with custom branding
 4. Upload to Google Drive queue (15tEG1buRhHi8g4lkv98KMJC_-LHupuvV)
    (Supports both Google Service Account API in Cloud and gdrive CLI on Local)
 """
@@ -81,7 +81,7 @@ def upload_to_drive(file_path: str, parent_folder_id: str) -> str:
 
 def run_feedback_loop_batch(num_reels: int = 3):
     print("=" * 65)
-    print("🚀 RUNNING @vformemes TOPIC CLUSTERING FEEDBACK LOOP")
+    print("🚀 RUNNING TOPIC CLUSTERING FEEDBACK LOOP")
     print("=" * 65)
 
     TMP_OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -119,7 +119,7 @@ def run_feedback_loop_batch(num_reels: int = 3):
             output_mp4=out_path,
             duration=spec.get("duration", 6.5),
             aspect=spec.get("aspect", "16:9"),
-            watermark="@vformemes",
+            watermark=os.getenv("MEME_WATERMARK", ""),
             ss_offset=spec.get("ss_offset", 0)
         )
         file_size_mb = os.path.getsize(out_path) / (1024 * 1024)

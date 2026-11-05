@@ -6,7 +6,7 @@ Renders viral 1080x1920 Instagram Reels with:
 - Eye-level optical center ratio (no empty bottom void)
 - Crisp bold white headline
 - 16:9 or 4:3 video centered vertically
-- Subtle @vformemes watermark
+- Subtle customizable watermark
 """
 
 import os
@@ -26,7 +26,9 @@ FFMPEG = os.getenv("FFMPEG_PATH") or shutil.which("ffmpeg") or "ffmpeg"
 
 W, H = 1080, 1920
 
-def create_dark_overlay(lines, watermark="@vformemes", font_size=42, line_spacing=62, text_start_y=520, wm_y=1328):
+DEFAULT_WATERMARK = os.getenv("MEME_WATERMARK", "")
+
+def create_dark_overlay(lines, watermark=DEFAULT_WATERMARK, font_size=42, line_spacing=62, text_start_y=520, wm_y=1328):
     overlay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     draw = ImageDraw.Draw(overlay)
 
@@ -60,7 +62,7 @@ def render_centered_meme(
     output_mp4: str,
     duration: float = 7.5,
     aspect: str = "16:9",
-    watermark: str = "@vformemes",
+    watermark: str = DEFAULT_WATERMARK,
     ss_offset: float = 0
 ):
     vid_w = 1080

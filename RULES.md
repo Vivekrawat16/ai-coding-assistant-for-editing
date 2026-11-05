@@ -11,14 +11,14 @@ Never mix assets, credentials, Drive folders, or logic between these two tracks:
 
 | Parameter | Track 1: Personal (Reddit Memes) | Track 2: Client Clipping (Streamer Preme) |
 | :--- | :--- | :--- |
-| **Target Account** | `@vformemes` (PK: `56489482147`) | `@coool_verse_` (PK: `39514790939`) |
+| **Target Account** | Personal Meme Account | Client Campaign Account |
 | **Content Theme** | Relatable Desi/Indian Pop-culture Memes | Viral Streamer Moments (Twitch / Kick) |
 | **Canvas** | 1080x1920 (Pure Black Background) | 1080x1920 (Blurred/Darkened Stream Video) |
 | **Video Ratio** | 16:9 (1080x608) or 4:3 (1080x810) Centered | 16:9 (1080x608) Centered at `y=656` |
 | **Duration** | **6.0 to 8.0 seconds** (Fast loop) | **10.0 to 15.0 seconds** (Strict 15s max) |
 | **Header / Hook** | Clean white text (Montserrat-Bold 42pt) | 2-Line Bold Banner (White + Yellow, Black box) |
-| **Branding** | Subtle `@vformemes` watermark at bottom | Official `Preme_Overlay.png` centered below video |
-| **Watermark Rule** | `@vformemes` only | **Zero third-party watermarks** (Mandatory) |
+| **Branding** | Customizable subtle watermark | Official `Preme_Overlay.png` centered below video |
+| **Watermark Rule** | Optional personal watermark | **Zero third-party watermarks** (Mandatory) |
 | **Google Drive Queue** | `15tEG1buRhHi8g4lkv98KMJC_-LHupuvV` | `1NuU7Jc3zLVnd08UZh6U-2QrlWxOmEWXr` |
 | **Google Drive Archive**| `19oTHwlAxucPomUfLXAOanyDyzTMeshya` | `1E3xbmMxuMykWskFagbQ155mn5Dq1QWfG` |
 | **Posting Frequency** | **5x Daily** (10AM, 2PM, 5PM, 8PM, 11PM IST) | **Every 3 Hours** (8x Daily round-the-clock) |
@@ -69,7 +69,7 @@ ffmpeg -y -i raw_stream_clip.mp4 -i Preme_Overlay.png -t 14.0 \
 ---
 
 ## 📈 Algorithmic Feedback Loop Formula
-For `@vformemes`, every 2 days:
+For the Personal Meme account, every 2 days:
 1. Audit last 15 reels: `Score = Views + (Likes × 10) + (Comments × 20)`.
 2. Categorize topics: `chaar_log_relatives`, `landlord_pg`, `corporate_majdoori`, `startup_hustle`, `general_desi_meme`.
 3. Pick winning topic with highest average score.
