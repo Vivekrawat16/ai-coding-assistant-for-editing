@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Configuration for Autonomous Street Interview & Podcast Clipping Engine
+Configuration for Autonomous Indian Podcast & Street Interview Clipping Engine
+Prioritizes top viral Indian podcasts, street interviews, and life lessons.
 """
 import os
 from pathlib import Path
@@ -9,34 +10,39 @@ BASE_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE_DIR / "output"
 PROCESSED_FILE = BASE_DIR / "processed_podcasts.json"
 
-# Create output dir if needed
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# Target Channels & Search Queries for Street Interviews / Dating / Podcasts
+# Top Indian Curated Sources
 CURATED_SOURCES = [
     {
-        "name": "Bradley Martyn Raw Talk",
+        "name": "Raj Shamani (Figuring Out)",
         "type": "search",
-        "query": "ytsearch5:Bradley Martyn Raw Talk podcast",
-        "keywords": ["destroyed", "tate", "dating", "gym", "sneako", "cheating", "relationship"]
+        "query": "ytsearch5:Raj Shamani podcast interview",
+        "keywords": ["ojha", "vikas", "reality", "money", "power", "psychology", "dating", "dark", "truth"]
     },
     {
-        "name": "Whatever Podcast",
-        "type": "channel",
-        "url": "https://www.youtube.com/@whatever",
-        "keywords": ["destroys", "debate", "dating", "average", "feminist", "single mom", "gold digger"]
+        "name": "The Ranveer Show (TRS Hindi)",
+        "type": "search",
+        "query": "ytsearch5:The Ranveer Show Hindi podcast",
+        "keywords": ["secret", "mystery", "relationship", "truth", "ghost", "army", "god", "reality"]
     },
     {
-        "name": "Sneako Debates & Street",
+        "name": "Prakhar ke Pravachan & Dostcast",
         "type": "search",
-        "query": "ytsearch5:Sneako street debate podcast",
-        "keywords": ["debate", "street", "interview", "girlfriend", "modern"]
+        "query": "ytsearch5:Prakhar ke Pravachan dating psychology podcast",
+        "keywords": ["dating", "girls", "red flag", "breakup", "relationship", "psychology"]
     },
     {
-        "name": "Fresh and Fit",
+        "name": "Shubhankar Mishra Unplugged",
         "type": "search",
-        "query": "ytsearch5:Fresh and Fit podcast debate",
-        "keywords": ["debate", "girls", "dating", "accountability", "money"]
+        "query": "ytsearch5:Shubhankar Mishra podcast",
+        "keywords": ["unplugged", "controversy", "truth", "bollywood", "cricket", "politics"]
+    },
+    {
+        "name": "RealHit Indian Street Interviews",
+        "type": "search",
+        "query": "ytsearch5:RealHit street interview college",
+        "keywords": ["dating", "college", "dogla", "girls", "salary", "relationship", "reality"]
     }
 ]
 
@@ -50,7 +56,7 @@ BLUR_SIGMA = 35
 # Subtitle Settings
 SUBTITLE_FONT = "DejaVu Sans"
 SUBTITLE_FONT_SIZE = 58
-ACTIVE_WORD_COLOR = "&H0000FFFF&"  # Bright Yellow (BGR ASS format)
+ACTIVE_WORD_COLOR = "&H0000FFFF&"  # Bright Glowing Yellow
 DEFAULT_WORD_COLOR = "&H00FFFFFF&" # Pure White
 
 # Google Drive Queue (Optional sync to existing Drive queue)

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Slice Detector & Kinetic Caption Generator
-Uses local faster-whisper to analyze 45s audio buffers, picks the 11.5s - 14.5s
-punchline climax, generates catchy 2-line hook banners, and produces kinetic ASS subtitles.
+Slice Detector & Kinetic Caption Generator (Indian Content Optimized)
+Uses local faster-whisper to analyze 45s audio buffers of Indian Podcasts & Street Interviews.
+Finds punchline climax, generates catchy Hindi/Hinglish hook banners, and produces kinetic ASS subtitles.
 """
 
 import os
@@ -26,58 +26,49 @@ def format_ass_time(t: float) -> str:
     return f"{h:01d}:{m:02d}:{s:02d}.{cs:02d}"
 
 def transcribe_buffer(video_path: str) -> List[Dict]:
-    """Transcribes audio using local faster-whisper on CPU."""
+    """Transcribes audio using local faster-whisper base model (multilingual support)."""
     from faster_whisper import WhisperModel
 
-    print(f"🎙️ Transcribing buffer with faster-whisper: {video_path}...")
-    model = WhisperModel("tiny.en", device="cpu", compute_type="int8")
-    segments, _ = model.transcribe(video_path, word_timestamps=True)
+    print(f"🎙️ Transcribing Indian content buffer: {video_path}...")
+    model = WhisperModel("base", device="cpu", compute_type="int8")
+    
+    # Use task='translate' so Hindi/Hinglish audio gets clean, readable word-by-word kinetic subtitles
+    segments, info = model.transcribe(video_path, task="translate", word_timestamps=True)
 
     words = []
     for s in segments:
         for w in s.words:
             w_text = w.word.strip().upper()
             if w_text:
-                # Clean punctuation for display
                 words.append({
                     "word": w_text,
                     "start": max(0.0, w.start),
                     "end": max(w.start + 0.1, w.end)
                 })
 
-    print(f"  📝 Transcribed {len(words)} words.")
+    print(f"  📝 Transcribed {len(words)} words (Language: {info.language}).")
     return words
 
 def find_optimal_slice(words: List[Dict], buffer_duration: float, target_duration: float = 12.8) -> Tuple[float, float, str]:
-    """
-    Finds the most coherent 11.5s - 14.5s window containing a complete thought.
-    Prefers windows around the buffer center (peak replay moment).
-    """
+    """Finds the most coherent 11.5s - 14.5s window containing a complete thought."""
     if not words:
-        # Fallback to center slice
         mid = buffer_duration / 2.0
         start = max(0.0, mid - (target_duration / 2.0))
-        return (start, start + target_duration, "VIRAL PODCAST MOMENT")
+        return (start, start + target_duration, "VIRAL INDIAN MOMENT")
 
     center_time = buffer_duration / 2.0
     best_start = 0.0
     best_end = target_duration
     best_score = -9999.0
 
-    # Test candidate windows anchored on word starts
     for i, w in enumerate(words):
         w_start = w["start"]
-        # Look ahead for a word ending around target_duration
-        for j in range(i + 5, len(words)):
+        for j in range(i + 4, len(words)):
             w_end = words[j]["end"]
             dur = w_end - w_start
             if config.TARGET_MIN_DURATION <= dur <= config.TARGET_MAX_DURATION:
-                # Calculate window score
-                # 1. Proximity to center peak
                 center_dist = abs(((w_start + w_end) / 2.0) - center_time)
-                # 2. Preference for punchy sentence ends (. ! ?)
                 ends_with_punch = words[j]["word"].endswith((".", "!", "?"))
-                # 3. Density of words (high energy speech)
                 word_count = j - i + 1
 
                 score = (word_count * 1.5) - (center_dist * 2.5) + (10.0 if ends_with_punch else 0.0)
@@ -88,53 +79,52 @@ def find_optimal_slice(words: List[Dict], buffer_duration: float, target_duratio
                     best_end = w_end
 
     if best_score == -9999.0:
-        # Fallback window
         best_start = max(0.0, center_time - 6.5)
         best_end = min(buffer_duration, best_start + target_duration)
 
-    # Collect slice text
     slice_words = [w["word"] for w in words if best_start <= w["start"] <= best_end]
     full_slice_text = " ".join(slice_words)
 
     return (best_start, best_end, full_slice_text)
 
 def generate_viral_hooks(title: str, slice_text: str) -> Tuple[str, str]:
-    """
-    Generates 2 high-curiosity hook banner lines.
-    Line 1: Topic/Person (White)
-    Line 2: Punchline/Provocative Question (Yellow)
-    """
+    """Generates 2 high-curiosity hook banner lines customized for Indian content."""
     t_upper = title.upper()
     slice_upper = slice_text.upper()
 
-    # Extract speaker or show if identifiable
-    speaker = "STREET INTERVIEW"
-    if "TATE" in t_upper:
-        speaker = "ANDREW TATE ON SUCCESS"
-    elif "SNEAKO" in t_upper:
-        speaker = "SNEAKO DESTROYS ARGUMENT"
-    elif "BRADLEY" in t_upper or "RAW TALK" in t_upper:
-        speaker = "RAW TALK PODCAST"
-    elif "WHATEVER" in t_upper:
-        speaker = "WHATEVER PODCAST DEBATE"
-    elif "KIRK" in t_upper:
-        speaker = "CHARLIE KIRK UNFILTERED"
-    elif "GIRL" in t_upper or "DATING" in t_upper:
-        speaker = "BRUTAL DATING REALITY"
-    elif "GYM" in t_upper:
-        speaker = "GYM ADVICE & MINDSET"
-
-    # Line 2: Provocative question or punchline
-    if "MONEY" in slice_upper or "PRICE" in slice_upper or "RICH" in slice_upper:
-        line2 = "THIS IS WHAT REAL WEALTH FEELS LIKE 💸"
-    elif "SIMULATION" in slice_upper or "REALITY" in slice_upper or "LEVEL UP" in slice_upper:
-        line2 = "NEVER FEEL SORRY FOR YOURSELF 💀"
-    elif "GIRL" in slice_upper or "WOMEN" in slice_upper or "DATING" in slice_upper:
-        line2 = "SHE DID NOT EXPECT THIS ANSWER 😳"
-    elif "CHEATING" in slice_upper or "EX" in slice_upper:
-        line2 = "THE TRUTH ALWAYS COMES OUT 🚨"
+    # Line 1: Creator / Show / Speaker
+    if "OJHA" in t_upper:
+        speaker = "AVADH OJHA SIR ON LIFE REALITY"
+    elif "DIVYAKIRTI" in t_upper or "VIKAS" in t_upper:
+        speaker = "DR VIKAS DIVYAKIRTI SIR"
+    elif "RANVEER" in t_upper or "TRS" in t_upper or "BEERBICEPS" in t_upper:
+        speaker = "THE RANVEER SHOW • TRS HINDI"
+    elif "SHAMANI" in t_upper or "FIGURING OUT" in t_upper:
+        speaker = "RAJ SHAMANI • FIGURING OUT"
+    elif "PRAKHAR" in t_upper or "DOSTCAST" in t_upper:
+        speaker = "PRAKHAR KE PRAVACHAN"
+    elif "SHUBHANKAR" in t_upper:
+        speaker = "SHUBHANKAR MISHRA UNPLUGGED"
+    elif "REALHIT" in t_upper or "STREET" in t_upper or "COLLEGE" in t_upper or "DELHI" in t_upper:
+        speaker = "INDIAN STREET INTERVIEW"
+    elif "SAMAY" in t_upper or "LATENT" in t_upper:
+        speaker = "SAMAY RAINA UNFILTERED"
     else:
-        line2 = "LISTEN TO THIS VERY CAREFULLY 🧠"
+        speaker = "HARSH INDIAN REALITY"
+
+    # Line 2: The Provocative Punchline
+    if "POWER" in slice_upper or "UTILITY" in slice_upper or "GAME" in slice_upper:
+        line2 = "AGAR UTILITY KHATAM TOH GAME OVER 💀"
+    elif "MONEY" in slice_upper or "PAISA" in slice_upper or "RICH" in slice_upper or "POVERTY" in slice_upper:
+        line2 = "PAISA NAHI TOH LOG AUKAAT DIKHAYENGE 💸"
+    elif "GIRL" in slice_upper or "WOMEN" in slice_upper or "DATING" in slice_upper or "LOVE" in slice_upper:
+        line2 = "LADKI KA AISA JAWAB SUNKAR HOSH UD GAYE 😳"
+    elif "PARENT" in slice_upper or "BAAP" in slice_upper or "FAMILY" in slice_upper:
+        line2 = "BAAP SE PAISE MAANGNA BAND KARO 🚨"
+    elif "SUCCESS" in slice_upper or "TARGET" in slice_upper or "LIFE" in slice_upper:
+        line2 = "YE BAAT HAR YOUTH KO SAMAJHNI CHAHIYE 🧠"
+    else:
+        line2 = "SACH SUNOGE TOH RONGTE KHADE HO JAYENGE 🔥"
 
     return (speaker, line2)
 
@@ -145,11 +135,7 @@ def generate_kinetic_ass(
     output_ass_path: str,
     font_name: str = config.SUBTITLE_FONT
 ):
-    """
-    Generates an ASS subtitle file with 3-word chunks and glowing yellow active words.
-    Time offsets are normalized to start from 0.0s for the trimmed video.
-    """
-    # Filter words strictly inside the slice and re-zero timestamps
+    """Generates an ASS subtitle file with 3-word chunks and glowing yellow active words."""
     trimmed_words = []
     for w in words:
         if w["start"] >= slice_start and w["end"] <= slice_end:
@@ -159,7 +145,6 @@ def generate_kinetic_ass(
                 "end": max(0.1, w["end"] - slice_start)
             })
 
-    # Group into chunks of 3 words
     chunks = []
     chunk_size = 3
     for i in range(0, len(trimmed_words), chunk_size):
@@ -205,8 +190,8 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         vid_path = sys.argv[1]
         words = transcribe_buffer(vid_path)
-        start, end, text = find_optimal_slice(words, 45.0)
-        h1, h2 = generate_viral_hooks("Andrew Tate", text)
+        start, end, text = find_optimal_slice(words, 40.0)
+        h1, h2 = generate_viral_hooks("Avadh Ojha on Raj Shamani", text)
         print(f"Slice: {start:.2f}s -> {end:.2f}s ({end - start:.2f}s)")
         print(f"Hook: {h1} | {h2}")
-        generate_kinetic_ass(words, start, end, "/tmp/test_captions.ass")
+        generate_kinetic_ass(words, start, end, "/tmp/test_indian_captions.ass")
